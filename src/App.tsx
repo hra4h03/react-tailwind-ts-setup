@@ -1,18 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import { Routes } from './routes'
+import { Routes } from './routes/app.routes'
 
-import GlobalContext from './context/Global/Global.context'
 
 function App() {
-  
-  return (
-    <GlobalContext.Provider value={{}}>
-      <Router>
-        { Routes() }
-      </Router>
-    </GlobalContext.Provider>
-  );
+  return <div>
+    <h1>My app</h1>
+    {Routes()}
+  </div>
 }
 
 export default App; 
