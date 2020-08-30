@@ -1,30 +1,38 @@
-interface IPost { 
+export interface IPost { 
   title: string, 
   id: string 
 } 
 
+export interface IUser { 
+  name: string, 
+  emmail?: string,
+  id: string 
+} 
 
 export type AppState = {
   posts: IPost[]
 }
 
 export type AppAction = 
-  { type: "APP/CREATE_POST", payload: IPost}  | 
+  { type: "APP/CREATE_POST", payload: { post: IPost }}  | 
   { type: "APP/DELETE_POST", payload: { id: string } }  
 
+
 export type UserState = {
-  posts: IPost[]
+  authorized: boolean,
+  user: IUser | null
 }
 
 export type UserAction = 
-  { type: "USER/CREATE_POST", payload: IPost}  | 
-  { type: "USER/DELETE_POST", payload: { id: string } }  
-
-
+  { type: "USER/SIGN_IN", payload: { user: IUser }}  | 
+  { type: "USER/SIGN_OUT" }  
 
 export interface IStore {
   appState: AppState
   appDispatch: React.Dispatch<AppAction>
+  createPost: (post: IPost) => void
+  deletePost: (postId: string) => void
   userState: UserState
   userDispatch: React.Dispatch<UserAction>
+
 }
