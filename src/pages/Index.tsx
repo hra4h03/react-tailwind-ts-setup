@@ -12,13 +12,12 @@ export const Index = () => {
     }
   }
   return (
-    <div>
-      <input {...postInput.bind} />
-      <button onClick={clickHandler}>Add Post</button>
-      <pre>{JSON.stringify(appState.posts, null, 2)}</pre>
+    <div className="p-4">
+      <input className="input" {...postInput.bind} />
+      <button className="btn ml-3" onClick={clickHandler}>Add Post</button>
       {appState.posts.map(post => {
-        return <div key={post.id}>
-          {post.title} <button onClick={() => deletePost(post.id)} > delete </button>
+        return <div key={post.id} className="bg-gray-400 rounded p-3 my-2 flex justify-between items-center shadow-md">
+          <p className="text-gray-800 capitalize text-lg truncate pr-4">{post.title}</p> <button className="btn btn-red" onClick={() => deletePost(post.id)} > delete </button>
         </div>
       })}
     </div>
