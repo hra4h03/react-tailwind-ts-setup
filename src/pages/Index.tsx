@@ -13,7 +13,7 @@ export const Index = () => {
   }
   return (
     <div className="p-4">
-      <input className="input" {...postInput.bind} />
+      <input className="input" onCopy={(e) => console.log(e)} {...postInput.bind} />
       <button className="btn ml-3" onClick={clickHandler}>Add Post</button>
       {appState.posts.map(post => {
         return <div key={post.id} className="bg-gray-400 rounded p-3 my-2 flex justify-between items-center shadow-md">

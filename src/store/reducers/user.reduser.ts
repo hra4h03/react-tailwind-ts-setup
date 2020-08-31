@@ -1,28 +1,27 @@
-import { UserAction, UserState } from '../types';
+import { USER_ACTIONS, USER_STATE, USER } from '../types';
 import { useReducer } from 'react';
 
 
-const userInitialState: UserState = {
+const userInitialState: USER_STATE = {
   authorized: false,
   user: null
 }
 
-const userReducer = (state: UserState, action: UserAction): UserState => {
+const userReducer = (state: USER_STATE, action: USER_ACTIONS): USER_STATE => {
   switch (action.type) {
-    case "USER/SIGN_IN":
+    case USER.SIGN_IN:
       return {
         ...state,
         authorized: true,
         user: action.payload.user
       }
-    case "USER/SIGN_OUT":
+    case USER.SIGN_OUT:
       return {
         ...state,
         user: null,
         authorized: false
       }  
-    default:
-      return state
+    default: return state
   }
 }
 

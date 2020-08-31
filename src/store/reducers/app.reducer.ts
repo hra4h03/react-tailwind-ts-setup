@@ -1,22 +1,22 @@
 import { useReducer } from 'react';
-import { AppState, AppAction } from '../types';
+import { APP_STATE, APP_ACTIONS, APP } from '../types';
 import { useAppActions } from '../actions/app.actions';
 
-const appInitialState: AppState = {
+const appInitialState: APP_STATE = {
   posts: []
 }
-const appReducer = (state: AppState, action: AppAction): AppState => {
+const appReducer = (state: APP_STATE, action: APP_ACTIONS): APP_STATE => {
   switch (action.type) {
-    case "APP/CREATE_POST":
+    case APP.CREATE_POST: 
       return {
         ...state,
         posts: [...state.posts, action.payload.post]
       }
-    case "APP/DELETE_POST":
+    case APP.DELETE_POST:
       return {
         ...state,
         posts: state.posts.filter(post => post.id !== action.payload.id)
-      }    
+      }          
     default:
       return state
   }

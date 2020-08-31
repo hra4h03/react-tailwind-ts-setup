@@ -9,30 +9,35 @@ export interface IUser {
   id: string 
 } 
 
-export type AppState = {
+export type APP_STATE = {
   posts: IPost[]
 }
+export enum APP {
+  CREATE_POST = "APP_CREATE_POST", 
+  DELETE_POST = "APP_DELETE_POST",
+}
+export type APP_ACTIONS = 
+  { type: APP.CREATE_POST, payload: { post: IPost }}  | 
+  { type: APP.DELETE_POST, payload: { id: string } }  
 
-export type AppAction = 
-  { type: "APP/CREATE_POST", payload: { post: IPost }}  | 
-  { type: "APP/DELETE_POST", payload: { id: string } }  
-
-
-export type UserState = {
+export enum USER {
+  SIGN_IN = "SIGN_IN",
+  SIGN_OUT = "SIGN_OUT"
+}
+export type USER_STATE = {
   authorized: boolean,
   user: IUser | null
 }
 
-export type UserAction = 
-  { type: "USER/SIGN_IN", payload: { user: IUser }}  | 
-  { type: "USER/SIGN_OUT" }  
+export type USER_ACTIONS = 
+  { type: USER.SIGN_IN, payload: { user: IUser }}  | 
+  { type: USER.SIGN_OUT }  
 
 export interface IStore {
-  appState: AppState
-  appDispatch: React.Dispatch<AppAction>
+  appState: APP_STATE
+  appDispatch: React.Dispatch<APP_ACTIONS>
   createPost: (post: IPost) => void
   deletePost: (postId: string) => void
-  userState: UserState
-  userDispatch: React.Dispatch<UserAction>
-
+  userState: USER_STATE
+  userDispatch: React.Dispatch<USER_ACTIONS>
 }
