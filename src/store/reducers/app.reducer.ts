@@ -1,22 +1,16 @@
 import { useReducer } from 'react';
-import { APP_STATE, APP_ACTIONS, APP } from '../types';
-import { useAppActions } from '../actions/app.actions';
+import { APP_STATE, APP_ACTIONS } from '../types/app.types';
+import { useAppActions } from '../action/app.actions';
 
-const appInitialState: APP_STATE = {
-  posts: []
+export const appInitialState: APP_STATE = {
+
 }
-const appReducer = (state: APP_STATE, action: APP_ACTIONS): APP_STATE => {
+const appReducer = (state: APP_STATE = appInitialState, action: APP_ACTIONS): APP_STATE => {
   switch (action.type) {
-    case APP.CREATE_POST: 
+    case  'APP_CREATE_WORD': 
       return {
         ...state,
-        posts: [...state.posts, action.payload.post]
       }
-    case APP.DELETE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter(post => post.id !== action.payload.id)
-      }          
     default:
       return state
   }
@@ -24,7 +18,5 @@ const appReducer = (state: APP_STATE, action: APP_ACTIONS): APP_STATE => {
 
 export default function useAppReducer() {
   const [appState, appDispatch] = useReducer(appReducer, appInitialState)
-  const { deletePost, createPost } = useAppActions(appDispatch)
-
-  return { appState, appDispatch, deletePost, createPost }
+  return { appState, appDispatch, ...useAppActions(appDispatch) }
 } 

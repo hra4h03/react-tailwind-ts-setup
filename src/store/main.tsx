@@ -1,19 +1,19 @@
 import React, { createContext, useContext } from 'react'
-import useUserReducer from './reducers/user.reduser'
 import useAppReducer from './reducers/app.reducer'
-import { IStore } from './types'
+import IStore from './types'
 
-const GlobalContext = createContext<Partial<IStore>>({})
+type IContext = IStore<{ 
+  app: ReturnType<typeof useAppReducer>, 
+}>
 
-export const useStore = () => useContext(GlobalContext) as IStore
+const GlobalContext = createContext<Partial<IContext | undefined>>(undefined)
+
+export const useAppNampespace = () => useContext(GlobalContext)!.app 
 
 export const StoreProvider: React.FC = ({ children }) => {
-  const { appState, appDispatch, createPost, deletePost } = useAppReducer()
-  const { userState, userDispatch } = useUserReducer()
-
   return (
-    <GlobalContext.Provider value={{
-      appState, appDispatch, userState, userDispatch, createPost, deletePost
+    <GlobalContext.Provider value={{ 
+      app: useAppReducer(), 
     }}>
       {children}
     </GlobalContext.Provider>
