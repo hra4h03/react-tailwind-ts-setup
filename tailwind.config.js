@@ -5,7 +5,10 @@ module.exports = {
     defaultLineHeights: true,
     standardFontWeights: true,
   },
-  purge: [],
+  purge: {
+    enable: process.env.NODE_ENV === "production",
+    content: ["./src/**/*.tsx", "./public/index.html"],
+  },
   theme: {
     extend: {},
   },
